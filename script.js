@@ -16,6 +16,16 @@ navigation.querySelectorAll('a').forEach((link) => {
   });
 });
 
+document.addEventListener('click', (event) => {
+  const navWrap = document.querySelector('.nav-wrap');
+
+  if (!navWrap.contains(event.target)) {
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation');
+    navigation.classList.remove('is-open');
+  }
+});
+
 document.querySelector('#year').textContent = new Date().getFullYear();
 
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -33,3 +43,18 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
     observer.observe(item);
   });
 }
+
+const title = document.querySelector("#typing-title");
+
+const text = "Mechanical engineer & instructor";
+let index = 0;
+
+function typeText() {
+    if (index < text.length) {
+        title.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeText, 75);
+    }
+}
+
+typeText();
